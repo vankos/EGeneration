@@ -10,9 +10,10 @@ namespace EGeneration
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("What accuracy you want?(numbers after the decimal point): ");
-            int NumberOfNumbers =Convert.ToInt32( Console.ReadLine())+3;
-            Console.WriteLine("{0}", FindEiler(NumberOfNumbers));
+            Console.WriteLine("What numbers after the decimal point you want?(max:23):");
+            int NumberOfNumbers =Convert.ToInt32( Console.ReadLine())+3;//max 26 (23 from input)
+            
+            Console.WriteLine("{0}", FindEiler(NumberOfNumbers).ToString().Substring(0,NumberOfNumbers-1), NumberOfNumbers);
             Console.ReadLine();
         }
 
@@ -28,6 +29,7 @@ namespace EGeneration
                 }
                 e += 1 /Factorial;
             }
+            Math.Round(e, n);
             return e;
         }
     }

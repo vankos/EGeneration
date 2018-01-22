@@ -11,9 +11,10 @@ namespace EGeneration
         static void Main(string[] args)
         {
             Console.WriteLine("What numbers after the decimal point you want?(max:23):");
-            int NumberOfNumbers =Convert.ToInt32( Console.ReadLine())+3;//max 26 (23 from input)
-            
-            Console.WriteLine("{0}", FindEiler(NumberOfNumbers).ToString().Substring(0,NumberOfNumbers-1), NumberOfNumbers);
+            string userInputString = Console.ReadLine();
+            int NumberOfNumbers = ValidateInput(userInputString);
+            //i have to use substring meethod for cut exactly necessary amount of digit 
+            Console.WriteLine("e={0}", FindEiler(NumberOfNumbers).ToString().Substring(0,NumberOfNumbers-1));
             Console.ReadLine();
         }
 
@@ -29,8 +30,18 @@ namespace EGeneration
                 }
                 e += 1 /Factorial;
             }
-            Math.Round(e, n);
             return e;
+        }
+
+        private static int ValidateInput(string userInputString)
+        {
+            int numberOfNumbers;
+            while ((!int.TryParse(userInputString, out numberOfNumbers)) || (numberOfNumbers < 0)||(numberOfNumbers>23))
+            {
+                Console.Write("Write correct value:");
+                userInputString = Console.ReadLine();
+            }
+            return numberOfNumbers+3;
         }
     }
 }
